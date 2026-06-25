@@ -18,12 +18,18 @@
             <h1>Sistema de cruce de RIPS</h1>
 
             <p>
-                Procesamiento y validación de registros RIPS.
+                Herramienta para identificar automáticamente posibles cruces en cartera a partir de archivos de Excel.
             </p>
 
             <p>
-                Identifica registros con el mismo cliente, el mismo OrdenMv y saldos cuota opuestos para generar cruces automáticamente.
+                El sistema analiza registros con el mismo Cliente y OrdenMv, clasificándolos en:
             </p>
+
+            <ul class="descripcion">
+                <li>Cruces exactos con saldos opuestos.</li>
+                <li>Grupos de registros cuya suma total es cero.</li>
+                <li>Casos con el mismo Cliente y OrdenMv que requieren validación manual.</li>
+            </ul>
 
         </div>
 
@@ -87,19 +93,41 @@
 
                 {% if resultado %}
 
+                    <h3>Resumen del procesamiento</h3>
+
                     <p>
-                        Filas originales:
-                        {{ resultado["filas_originales"] }}
+                        ★ Filas originales:
+                        <strong>{{ resultado["filas_originales"] }}</strong>
                     </p>
 
                     <p>
-                        Cruces encontrados:
-                        {{ resultado["cruces_encontrados"] }}
+                        ★ Cruces exactos:
+                        <strong>{{ resultado["cruces_exactos"] }}</strong>
                     </p>
 
                     <p>
-                        Filas exportadas:
-                        {{ resultado["filas_exportadas"] }}
+                        ★ Filas en cruces exactos:
+                        <strong>{{ resultado["filas_cruces"] }}</strong>
+                    </p>
+
+                    <p>
+                        ★ Grupos con suma total igual a cero:
+                        <strong>{{ resultado["grupos_suma_cero"] }}</strong>
+                    </p>
+
+                    <p>
+                        ★ Filas en grupos suma cero:
+                        <strong>{{ resultado["filas_suma_cero"] }}</strong>
+                    </p>
+
+                    <p>
+                        ★ Grupos pendientes de revisión:
+                        <strong>{{ resultado["grupos_pendientes"] }}</strong>
+                    </p>
+
+                    <p>
+                        ★ Filas pendientes de revisión:
+                        <strong>{{ resultado["filas_pendientes"] }}</strong>
                     </p>
 
                     <br>

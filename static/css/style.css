@@ -109,3 +109,24 @@ button:hover{
 .boton-descarga:hover{
     background-color: #006f6f;
 }
+
+.descripcion {
+    display: inline-block;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.descripcion li {
+    margin-bottom: 8px;
+}
+
+.resultado h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.resultado p {
+    margin-bottom: 8px;
+}
