@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>Sistema de cruce de RIPS</title>
+
+    </head>
+
+    <body>
+
+        <div class="encabezado">
+
+            <h1>Sistema de cruce de RIPS</h1>
+
+            <p>
+                Procesamiento y validación de registros RIPS.
+            </p>
+
+            <p>
+                Identifica registros con el mismo cliente, el mismo OrdenMv y saldos cuota opuestos para generar cruces automáticamente.
+            </p>
+
+        </div>
+
+        <div class="contenedor-rips">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <div class="seccion">
+
+                    <h2>Archivo de entrada</h2>
+
+                    <label for="archivo">Archivo Excel</label>
+
+                    <input
+                    type="file"
+                    id="archivo"
+                    name="archivo"
+                    required>
+                
+                </div>
+
+                <div class="seccion">
+
+                    <h2>Configuración</h2>
+
+                    <label for="hoja">Hoja a procesar</label>
+                        
+                    <input
+                    type="text"
+                    id="hoja"
+                    name="hoja"
+                    value="0">
+
+                    <p class="ayuda">
+                        Usa 0 para la primera hoja, 1 para la segunda o escribe el nombre de la hoja.
+                    </p>
+
+                </div>
+
+                <div class="seccion">
+                    <button type="submit">
+                        Generar cruces
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="resultado">
+
+                {% if error %}
+
+                <div class="resultado error">
+
+                    <p>
+                        {{ error }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+                {% if resultado %}
+
+                    <p>
+                        Filas originales:
+                        {{ resultado["filas_originales"] }}
+                    </p>
+
+                    <p>
+                        Cruces encontrados:
+                        {{ resultado["cruces_encontrados"] }}
+                    </p>
+
+                    <p>
+                        Filas exportadas:
+                        {{ resultado["filas_exportadas"] }}
+                    </p>
+
+                    <br>
+
+                    <a href="/descargar" class="boton-descarga">
+                        Descargar archivo generado
+                    </a>
+
+                {% else %}
+
+                    <p>
+                        Seleccione un archivo para comenzar.
+                    </p>
+                
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
